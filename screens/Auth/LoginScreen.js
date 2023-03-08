@@ -1,16 +1,42 @@
-import {View, Text, Image, Dimensions, SafeAreaView} from 'react-native';
-import React from 'react';
+import {View, Text, Image, Dimensions, SafeAreaView, Alert} from 'react-native';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Input from '../components/Input';
-import Button from '../components/Button';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
+import { useNavigation } from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('window');
 
-const LoginScreen = ({setShowLogin}) => {
+const LoginScreen = ({setUser}) => {
+
+  const [email, setEmail] = useState("");
+
+  const navigation = useNavigation();
+
+  const handleLogin = () => {
+    if (email) {
+      setUser({email: email})
+      navigation.navigate("DashboardRoute", {
+        screen: "HomeTabs",
+        params: {
+          screen: "Home",
+          params: {
+            email: email
+          }
+        }
+      })
+    } else {
+      new Alert.alert({
+        title: "",
+        message: "Please enter email address"
+      })
+    }
+  }
+
   return (
     <>
       <Image
-        source={require('../assets/bg.jpeg')}
+        source={{uri: "https://images.unsplash.com/photo-1583004231608-3ce0c58f5867?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bmF0dXJlJTIwd2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80"}}
         style={{
           width: width,
           height: height,
@@ -47,6 +73,8 @@ const LoginScreen = ({setShowLogin}) => {
             width={width}
             height={height}
             keyboard="email-address"
+            value={email}
+            onChangeInput={(text) => setEmail(text)}
           />
           <Input
             label="PASSWORD"
@@ -72,7 +100,7 @@ const LoginScreen = ({setShowLogin}) => {
             color="rgba(255,65,65,1)"
             isSocial={false}
             widthMultiplier={0.8}
-            pressHandler={() => setShowLogin(false)}
+            pressHandler={() => handleLogin()}
           />
           <View
             style={{

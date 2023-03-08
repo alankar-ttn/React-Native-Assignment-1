@@ -8,6 +8,8 @@ const Input = ({
   height,
   keyboard,
   secureTextEntry = false,
+  value = "",
+  onChangeInput = null
 }) => {
   return (
     <View
@@ -37,6 +39,8 @@ const Input = ({
         placeholder={placeholder}
         keyboardType={keyboard}
         secureTextEntry={secureTextEntry}
+        value={value}
+        onChangeText={onChangeInput}
       />
     </View>
   );

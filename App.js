@@ -1,13 +1,12 @@
-import React, {useState} from 'react';
-import LandingScreen from './screens/LandingScreen';
-import LoginScreen from './screens/LoginScreen';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import Routes from './config/routes/Routes';
 
 const App = () => {
-  const [showLogin, setShowLogin] = useState(false);
-  return showLogin ? (
-    <LoginScreen setShowLogin={setShowLogin} />
-  ) : (
-    <LandingScreen setShowLogin={setShowLogin} />
+  return (
+    <NavigationContainer>
+      <Routes />
+    </NavigationContainer>
   );
 };
 

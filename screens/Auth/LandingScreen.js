@@ -1,15 +1,20 @@
 import {View, Text, SafeAreaView, Image, Dimensions} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Button from '../components/Button';
+import Button from '../../components/Button';
+import {useNavigation} from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('window');
 
-const LandingScreen = ({setShowLogin}) => {
+const LandingScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <>
       <Image
-        source={require('../assets/bg.jpeg')}
+        source={{
+          uri: 'https://images.unsplash.com/photo-1583004231608-3ce0c58f5867?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bmF0dXJlJTIwd2FsbHBhcGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80',
+        }}
         style={{
           width: width,
           height: height,
@@ -68,7 +73,7 @@ const LandingScreen = ({setShowLogin}) => {
             color="red"
             widthMultiplier={0.75}
             heightMultiplier={0.06}
-            pressHandler={() => setShowLogin(true)}
+            pressHandler={() => navigation.navigate("Login")}
             fontSize={20}
             marginVertical={8}
           />
